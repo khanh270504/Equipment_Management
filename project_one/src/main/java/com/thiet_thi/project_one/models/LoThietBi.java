@@ -22,7 +22,7 @@ public class LoThietBi {
     @Column(name = "ten_lo", nullable = false, length = 200)
     private String tenLo;
 
-    // --- CÁC LIÊN KẾT (GIỮ NGUYÊN) ---
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_loai", nullable = false)
     private LoaiThietBi loaiThietBi;

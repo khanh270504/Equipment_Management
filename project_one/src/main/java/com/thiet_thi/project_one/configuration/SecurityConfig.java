@@ -37,11 +37,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/donVi").permitAll()
                         .anyRequest().authenticated()
                 )
-                // CORS – ĐÃ FIX HOÀN HẢO
+
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     config.setAllowedOrigins(List.of("http://localhost:5173"));
-                    // BẮT BUỘC PHẢI CÓ "PATCH" VÀ "OPTIONS"
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
                     config.setAllowedHeaders(List.of("*"));
                     config.setExposedHeaders(List.of("Authorization"));

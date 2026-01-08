@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/lo_thiet_bi")
 @RequiredArgsConstructor
-@CrossOrigin("*") // Cho phép Frontend gọi API
+@CrossOrigin("*")
 public class LoThietBiController {
 
 
@@ -25,19 +25,19 @@ public class LoThietBiController {
     private final LoThietBiRepository loThietBiRepository;
     private final ExcelService excelService;
 
-    // 1. Nhập lô thủ công
+
     @PostMapping
     public ApiResponse<LoThietBiResponse> create(@Valid @RequestBody LoThietBiDto dto) {
-        // Không cần try-catch, lỗi sẽ tự bay về GlobalExceptionHandler
+
         LoThietBi lo = loThietBiService.create(dto);
 
-        // Trả về dạng chuẩn ApiResponse
+
         return ApiResponse.<LoThietBiResponse>builder()
                 .result(LoThietBiResponse.from(lo))
                 .build();
     }
 
-    // 2. Lấy tất cả lô
+
     @GetMapping
     public ApiResponse<List<LoThietBiResponse>> getAll() {
         List<LoThietBiResponse> list = loThietBiService.getAll().stream()
@@ -49,7 +49,7 @@ public class LoThietBiController {
                 .build();
     }
 
-    // 3. Lấy 1 lô
+
     @GetMapping("/{ma}")
     public ApiResponse<LoThietBiResponse> getByMa(@PathVariable String ma) {
         return ApiResponse.<LoThietBiResponse>builder()
@@ -57,7 +57,7 @@ public class LoThietBiController {
                 .build();
     }
 
-    // 4. Nhập kho tự động từ đề xuất
+
     @PostMapping("/nhap-kho/{maDeXuat}")
     public ApiResponse<List<LoThietBiResponse>> nhapKhoTuDeXuat(@PathVariable String maDeXuat) {
         List<LoThietBiResponse> list = loThietBiService.nhapKhoTuDeXuat(maDeXuat).stream()
@@ -69,7 +69,6 @@ public class LoThietBiController {
                 .build();
     }
 
-    // 5. Thống kê (Nên chuyển logic này vào Service)
     @GetMapping("/stats")
     public ApiResponse<LoTBStatDto> getStats() {
 
@@ -86,11 +85,10 @@ public class LoThietBiController {
 
             return ApiResponse.<byte[]>builder()
                     .result(excelBytes)
-                    .build(); // Hoặc hàm ApiResponse.success(excelBytes) tùy code bạn
+                    .build();
 
         } catch (Exception e) {
             e.printStackTrace();
-            // Tùy cách bạn handle lỗi trong ApiResponse
             throw new RuntimeException("Lỗi xuất file Excel");
         }
     }

@@ -10,7 +10,6 @@ public interface IVaiTroService {
 
     List<VaiTroDto> getAllRoles();
 
-    // dùng maVaiTro làm khóa chính
     VaiTroDto getRoleByMaVaiTro(String maVaiTro);
 
     VaiTroDto createRole(VaiTroDto dto);

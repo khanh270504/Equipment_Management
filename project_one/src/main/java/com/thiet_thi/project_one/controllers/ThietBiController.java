@@ -80,7 +80,7 @@ public class ThietBiController {
         } catch (DataNotFoundException e) {
             return ResponseEntity.status(404).body(e.getMessage());
         } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().body(e.getMessage()); // Ví dụ: không xóa được nếu đang trong kiểm kê
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
     @GetMapping
@@ -90,7 +90,6 @@ public class ThietBiController {
             @RequestParam(defaultValue = "maTB") String sortBy,
             @RequestParam(defaultValue = "ASC") String sortDirection,
 
-            // THAM SỐ LỌC TỪ FRONTEND
             @RequestParam(required = false) String search,
             @RequestParam(required = false) String loai,
             @RequestParam(required = false) String tinhTrang,
@@ -100,7 +99,7 @@ public class ThietBiController {
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        // Gọi hàm Service mới để áp dụng lọc
+
         Page<ThietBiResponse> thietBiPage = thietBiService.searchAndFilter(
                 search, loai, tinhTrang, phong, maDonVi, pageable
         );
@@ -120,16 +119,15 @@ public class ThietBiController {
     }
 
     @GetMapping("/export")
-    public ResponseEntity<byte[]> exportExcel() { // Không cần tham số đầu vào nữa
+    public ResponseEntity<byte[]> exportExcel() {
         try {
-            // 1. Lấy TẤT CẢ thiết bị (Dùng luôn Repository cho nhanh, hoặc qua Service)
-            // Lưu ý: Phải lấy List<ThietBi> (Entity) để khớp với ExcelService
+
             List<ThietBi> listData = thietBiRepository.findAll();
 
-            // 2. Vẽ Excel
+
             byte[] excelBytes = excelService.exportThietBiToExcel(listData);
 
-            // 3. Trả về
+
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=toan_bo_thiet_bi.xlsx")
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)

@@ -16,7 +16,6 @@ public class NhaCungCapResponse {
     private String email;
     private String maSoThue;
 
-    // Hàm chuyển đổi từ Entity sang Response
     public static NhaCungCapResponse from(NhaCungCap ncc) {
         return NhaCungCapResponse.builder()
                 .maNhaCungCap(ncc.getMaNhaCungCap())

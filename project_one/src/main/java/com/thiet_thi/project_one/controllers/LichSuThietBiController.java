@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/lich-su-thiet-bi")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class LichSuThietBiController {  // ĐÃ SỬA: XÓA DÒNG SAI, ĐÚNG TÊN CLASS
+public class LichSuThietBiController {
 
     private final ILichSuThietBiService lichSuThietBiService;
 

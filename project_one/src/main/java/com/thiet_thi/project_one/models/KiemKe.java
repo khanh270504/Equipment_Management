@@ -18,15 +18,13 @@ public class KiemKe {
     @Column(name = "ma_kiem_ke")
     private String maKiemKe;
 
-    // --- 1. SỬA NGƯỜI KIỂM KÊ ---
-    // Giữ lại thông tin người dùng, nhưng bỏ qua các trường nhạy cảm hoặc gây loop
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_nd", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "matKhau", "vaiTro", "donVi", "lichSuThietBis", "kiemKes"})
     private NguoiDung nguoiKiemKe;
 
-    // --- 2. SỬA PHÒNG (QUAN TRỌNG NHẤT) ---
-    // Giữ lại object Phong, NHƯNG bỏ qua danh sách thiết bị con để cắt đứt Đệ Quy
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_phong", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "thietBis", "cacPhienKiemKe", "donVi"})
@@ -44,8 +42,6 @@ public class KiemKe {
     @Column(name = "ghi_chu", length = 200)
     private String ghiChu;
 
-    // Danh sách chi tiết kiểm kê vẫn nên Ignore ở chiều này nếu trả về danh sách lớn
-    // Nếu bạn muốn lấy chi tiết thì phải dùng DTO hoặc cẩn thận config ngược lại bên ChiTietKiemKe
     @OneToMany(mappedBy = "kiemKe", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     @JsonIgnore

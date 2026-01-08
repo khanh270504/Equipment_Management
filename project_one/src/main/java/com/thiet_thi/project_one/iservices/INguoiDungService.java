@@ -23,5 +23,4 @@ public interface INguoiDungService {
 
     Page<NguoiDungResponse> searchAndFilter(String search, String vaiTro, String donVi, String trangThai, Pageable pageable);
 
-    // TRONG NguoiDungService (Implementation)
 }

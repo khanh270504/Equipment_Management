@@ -27,12 +27,10 @@ public class DashboardService {
         List<ThietBi> all = thietBiRepo.findAll();
         long tong = all.size();
 
-        // 1. Đang hoạt động = trạng thái là "Đang sử dụng"
         long dangSuDung = all.stream()
                 .filter(tb -> "Đang sử dụng".equalsIgnoreCase(tb.getTinhTrang()))
                 .count();
 
-        // 2. Cần bảo trì = trạng thái chứa từ "bảo trì" hoặc "hỏng" (tùy đồ án bạn)
         long canBaoTri = all.stream()
                 .filter(tb -> tb.getTinhTrang() != null &&
                         (tb.getTinhTrang().toLowerCase().contains("bảo trì") ||
@@ -40,11 +38,8 @@ public class DashboardService {
                                 tb.getTinhTrang().toLowerCase().contains("hư")))
                 .count();
 
-        // 3. Giá trị tài sản còn lại
         BigDecimal giaTriConLai = all.stream()
-                // Lọc bỏ thiết bị có trạng thái "Đã thanh lý"
                 .filter(tb -> tb.getTinhTrang() == null || !"Đã thanh lý".equals(tb.getTinhTrang()))
-                // Lấy giá trị hiện tại, nếu null thì lấy nguyên giá, nếu nguyên giá null thì 0
                 .map(tb -> {
                     if (tb.getGiaTriHienTai() != null) {
                         return tb.getGiaTriHienTai();
@@ -54,10 +49,8 @@ public class DashboardService {
                         return BigDecimal.ZERO;
                     }
                 })
-                // Tính tổng
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // 4. Thiết bị theo đơn vị
         List<Map<String, Object>> theoDonVi = donViRepo.findAll().stream()
                 .map(dv -> Map.<String, Object>of(
                         "donVi", dv.getTenDonVi(),
@@ -66,7 +59,6 @@ public class DashboardService {
                 ))
                 .collect(Collectors.toList());
 
-        // 5. Trạng thái thiết bị (biểu đồ tròn)
         Map<String, Long> mapTrangThai = all.stream()
                 .collect(Collectors.groupingBy(
                         tb -> tb.getTinhTrang() != null ? tb.getTinhTrang() : "Chưa xác định",
@@ -85,9 +77,7 @@ public class DashboardService {
                 })
                 .collect(Collectors.toList());
 
-        // 6. Hoạt động gần đây – vẫn giữ nguyên (dùng bảng có sẵn)
         List<DashboardResponse.HoatDongGanDay> activities = new ArrayList<>();
-        // ... (giữ nguyên phần nhập kho, kiểm kê, thanh lý như trước)
 
         return DashboardResponse.builder()
                 .tongThietBi(tong)
@@ -95,7 +85,7 @@ public class DashboardService {
                 .dangHoatDong(dangSuDung)
                 .tyLeHoatDong(tong > 0 ? Math.round((double) dangSuDung / tong * 100) + "% tổng số" : "0%")
                 .canBaoTri(canBaoTri)
-                .canBaoTriQuaHan("0 quá hạn") // nếu chưa có field ngày bảo trì thì để 0
+                .canBaoTriQuaHan("0 quá hạn")
                 .giaTriTaiSan(giaTriConLai)
                 .ghiChuGiaTri("Sau khấu hao")
                 .thietBiTheoDonVi(theoDonVi)

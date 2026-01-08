@@ -10,13 +10,11 @@ import org.springframework.data.repository.query.Param;
 public interface DeXuatMuaRepository extends JpaRepository<DeXuatMua, String> {
 
     @Query("SELECT dx FROM DeXuatMua dx WHERE " +
-            // Lọc theo từ khóa (Mã ĐX, Tiêu đề, Nội dung)
+
             "(:search IS NULL OR lower(dx.maDeXuat) LIKE lower(concat('%', :search, '%')) OR " +
             "lower(dx.tieuDe) LIKE lower(concat('%', :search, '%')) OR " +
             "lower(dx.noiDung) LIKE lower(concat('%', :search, '%'))) AND " +
-            // Lọc theo Trạng thái
             "(:trangThai IS NULL OR dx.trangThai = :trangThai) AND " +
-            // Lọc theo Mã Người tạo
             "(:maNguoiTao IS NULL OR dx.nguoiTao.maND = :maNguoiTao)")
     Page<DeXuatMua> findByCriteria(
             @Param("search") String search,

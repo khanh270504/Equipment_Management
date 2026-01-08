@@ -11,7 +11,6 @@ import java.util.List;
 public interface IDeXuatMuaService {
     DeXuatMuaResponse create(DeXuatMuaDto dto) throws DataNotFoundException;
 
-    // Lấy tất cả (Admin/Hiệu trưởng xem)
     List<DeXuatMuaResponse> getAll();
 
 
@@ -26,7 +25,7 @@ public interface IDeXuatMuaService {
 
     Page<DeXuatMuaResponse> getAllPage(Pageable pageable);
 
-    // HÀM MỚI: Tìm kiếm và Lọc Nâng cao
+
     Page<DeXuatMuaResponse> searchAndFilter(
             String search,
             String trangThai,

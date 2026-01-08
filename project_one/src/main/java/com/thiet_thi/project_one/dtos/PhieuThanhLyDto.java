@@ -46,33 +46,28 @@ public class PhieuThanhLyDto {
     @JsonProperty("trang_thai")
     private String trangThai;
 
-    // Người tạo phiếu
     @JsonProperty("ma_nguoi_tao")
     private String maNguoiTao;
 
     @JsonProperty("ten_nguoi_tao")
     private String tenNguoiTao;
 
-    // Người duyệt phiếu
     @JsonProperty("ma_nguoi_duyet")
     private String maNguoiDuyet;
 
     @JsonProperty("ten_nguoi_duyet")
     private String tenNguoiDuyet;
 
-    // Thống kê
     @JsonProperty("tong_thiet_bi")
     private Integer tongThietBi;
 
     @JsonProperty("tong_gia_tri_thu_ve")
     private BigDecimal tongGiaTriThuVe;
 
-    // Danh sách chi tiết thanh lý
     @JsonProperty("chi_tiet")
     @Builder.Default
     private List<ChiTietThanhLyDto> chiTiet = new ArrayList<>();
 
-    // Tự động tính tổng thiết bị nếu chưa có (rất tiện khi map)
     public Integer getTongThietBi() {
         if (this.tongThietBi != null) {
             return this.tongThietBi;
@@ -80,7 +75,6 @@ public class PhieuThanhLyDto {
         return chiTiet != null ? chiTiet.size() : 0;
     }
 
-    // Tự động tính tổng giá trị thu về nếu chưa có
     public BigDecimal getTongGiaTriThuVe() {
         if (this.tongGiaTriThuVe != null && this.tongGiaTriThuVe.compareTo(BigDecimal.ZERO) > 0) {
             return this.tongGiaTriThuVe;

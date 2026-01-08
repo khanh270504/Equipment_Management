@@ -75,7 +75,7 @@ public class DonViResponse {
 
     public static DonViResponse fromDonVi(DonVi dv) {
         if (dv == null) {
-            return null; // Admin hoặc user không thuộc đơn vị nào
+            return null;
         }
         return DonViResponse.builder()
                 .maDonVi(dv.getMaDonVi())

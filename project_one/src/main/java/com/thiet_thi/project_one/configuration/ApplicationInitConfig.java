@@ -26,11 +26,16 @@ public class ApplicationInitConfig {
     VaiTroRepository vaiTroRepository;
 
     @NonFinal
+    @Value("${admin.username}")
+    protected String adUsername;
+
+    @NonFinal
     @Value("${admin.password}")
     protected String adPassword;
+
     @EventListener(ApplicationReadyEvent.class)
     public void initAdmin() {
-        String adminUsername = "admin@gmail.com";
+        String adminUsername = adUsername;
         String adminPassword = passwordEncoder.encode(adPassword);
 
 

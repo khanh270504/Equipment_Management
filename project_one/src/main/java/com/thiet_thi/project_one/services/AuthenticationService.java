@@ -64,12 +64,11 @@ public class AuthenticationService {
         var user = nguoiDungRepository.findByEmail(dto.getUserName())
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        // KIỂM TRA TRẠNG THÁI TÀI KHOẢN
         if (!"HOAT_DONG".equals(user.getTrangThai())) {
             if ("CHO_DUYET".equals(user.getTrangThai())) {
-                throw new AppException(ErrorCode.USER_NOT_APPROVED); // "Tài khoản đang chờ duyệt"
+                throw new AppException(ErrorCode.USER_NOT_APPROVED);
             }
-            throw new AppException(ErrorCode.USER_BLOCKED); // "Tài khoản đã bị khóa"
+            throw new AppException(ErrorCode.USER_BLOCKED);
         }
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
@@ -88,17 +87,17 @@ public class AuthenticationService {
                 .build();
     }
 
-    // ==================== GENERATE ACCESS TOKEN ====================
+
     public String generateAccessToken(NguoiDung nguoiDung) {
         return generateToken(nguoiDung, VALID_DURATION, "access");
     }
 
-    // ==================== GENERATE REFRESH TOKEN ====================
+
     public String generateRefreshToken(NguoiDung nguoiDung) {
         return generateToken(nguoiDung, REFRESHABLE_DURATION, "refresh");
     }
 
-    // ==================== GENERATE TOKEN CHUNG ====================
+
     private String generateToken(NguoiDung nguoiDung, long duration, String type) {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()

@@ -21,7 +21,7 @@ public class DeXuatMuaResponse {
 
     private String trangThai;
 
-    // --- THÔNG TIN NGƯỜI TẠO ---
+
     private String maNguoiTao;
     private String tenNguoiTao;
 
@@ -29,7 +29,7 @@ public class DeXuatMuaResponse {
     private String tenPhong;
     private String tenDonVi;
 
-    // --- THÔNG TIN NGƯỜI DUYỆT ---
+
     private String maNguoiDuyet;
     private String tenNguoiDuyet;
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -50,7 +50,7 @@ public class DeXuatMuaResponse {
     }
 
     public static DeXuatMuaResponse from(DeXuatMua entity) {
-        // 1. Tính tổng tiền
+
         BigDecimal totalAmount = BigDecimal.ZERO;
         List<ChiTietResponse> listChiTiet = new ArrayList<>();
 
@@ -81,7 +81,7 @@ public class DeXuatMuaResponse {
             tenPhong = entity.getPhong().getTenPhong();
         }
 
-        // 3. Build Response
+
         return DeXuatMuaResponse.builder()
                 .maDeXuat(entity.getMaDeXuat())
                 .tieuDe(entity.getTieuDe())

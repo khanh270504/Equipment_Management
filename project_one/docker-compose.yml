@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0.44-debian
+    container_name: mysqlE_M
+    restart: always
+    env_file:
+      - .env.docker
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  thiet_bi_truong_dh_utc:
+    image: helloworld22123/equipment-management:0.9.0
+    container_name: equipment-management
+    restart: always
+    depends_on:
+      - mysql
+    env_file:
+      - .env.docker
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:

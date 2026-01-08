@@ -54,18 +54,18 @@ public class ThietBiResponse {
         private String hanhDong;
     }
 
-    // Dùng cho danh sách (nhẹ)
+
     public static ThietBiResponse fromThietBi(ThietBi tb) {
 
-        BigDecimal calculatedGiaTriHienTai = tb.getGiaTriHienTai(); // Giá trị hiện tại từ DB (có thể null)
+        BigDecimal calculatedGiaTriHienTai = tb.getGiaTriHienTai();
 
-        // --- LOGIC TÍNH KHẤU HAO ĐỘNG – CHỐNG NULL ---
+        // TÍNH KHẤU HAO
         if (tb.getNgaySuDung() != null &&
                 tb.getLoaiThietBi() != null &&
                 tb.getLoaiThietBi().getThoiGianKhauHao() != null &&
                 tb.getLoaiThietBi().getThoiGianKhauHao() > 0 &&
                 tb.getGiaTriBanDau() != null &&
-                tb.getGiaTriBanDau().compareTo(BigDecimal.ZERO) > 0) { // THÊM KIỂM TRA NULL
+                tb.getGiaTriBanDau().compareTo(BigDecimal.ZERO) > 0) {
 
             int soNamKhauHao = tb.getLoaiThietBi().getThoiGianKhauHao();
 
@@ -82,11 +82,10 @@ public class ThietBiResponse {
                 calculatedGiaTriHienTai = BigDecimal.ZERO;
             }
         } else {
-            // Nếu không đủ điều kiện tính khấu hao → giữ nguyên giá trị DB hoặc 0
             calculatedGiaTriHienTai = tb.getGiaTriHienTai() != null ? tb.getGiaTriHienTai() : BigDecimal.ZERO;
         }
 
-        // Logic trạng thái hết khấu hao
+        //  trạng thái hết khấu hao
         String trangThaiHienThi = tb.getTinhTrang();
         if (calculatedGiaTriHienTai.compareTo(BigDecimal.ZERO) == 0 &&
                 !"Đã thanh lý".equals(trangThaiHienThi) &&
@@ -107,7 +106,7 @@ public class ThietBiResponse {
                         ? tb.getPhong().getDonVi().getTenDonVi() : null)
                 .tinhTrang(trangThaiHienThi)
                 .giaTriBanDau(tb.getGiaTriBanDau())
-                .giaTriHienTai(calculatedGiaTriHienTai) // Giá trị an toàn
+                .giaTriHienTai(calculatedGiaTriHienTai)
                 .ngaySuDung(tb.getNgaySuDung())
                 .nhaCungCap(tenNhaCungCap)
                 .soSeri(tb.getSoSeri())
@@ -115,9 +114,8 @@ public class ThietBiResponse {
                 .build();
     }
 
-    // gọi fromThietBi để lấy logic khấu hao
     public static ThietBiResponse fromThietBiDetail(ThietBi tb, List<LichSuHoatDong> lichSu) {
-        ThietBiResponse resp = fromThietBi(tb); // Vẫn gọi hàm fromThietBi để có logic khấu hao
+        ThietBiResponse resp = fromThietBi(tb);
 
         resp.setNgayMua(tb.getNgaySuDung());
 
@@ -125,7 +123,6 @@ public class ThietBiResponse {
             resp.setNguyenGiaFormatted(String.format("%,.0fđ", resp.getGiaTriBanDau()));
         }
         if (resp.getGiaTriHienTai() != null) {
-            // Dùng giá trị đã được tính toán động (resp.getGiaTriHienTai)
             resp.setGiaTriConLaiFormatted(String.format("%,.0fđ", resp.getGiaTriHienTai()));
         }
 

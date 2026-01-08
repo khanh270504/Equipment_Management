@@ -52,6 +52,6 @@ public class DeXuatMua {
     @Builder.Default
     private Set<ChiTietDeXuatMua> chiTietDeXuat = new HashSet<>();
 
-    @Column(name = "ly_do", columnDefinition = "TEXT") // Dùng TEXT để viết được dài
+    @Column(name = "ly_do", columnDefinition = "TEXT")
     private String lyDo;
 }

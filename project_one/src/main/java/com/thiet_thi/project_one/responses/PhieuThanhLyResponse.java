@@ -45,7 +45,7 @@ public class PhieuThanhLyResponse {
 
     private List<ChiTietResponse> chiTiet;
 
-    // ================= CHI TIẾT THANH LÝ – ĐÃ THÊM TRẠNG THÁI & NGƯỜI DUYỆT =================
+
     @Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
     public static class ChiTietResponse {
         private String maCttl;
@@ -55,11 +55,10 @@ public class PhieuThanhLyResponse {
         private String tenLoai;
         private String maPhong;
         private String tenPhong;
-        private String tinhTrang; // Trạng thái thiết bị
+        private String tinhTrang;
         private String soSeri;
 
-        // THÊM: Trạng thái duyệt từng món
-        private String trangThai; // "Chờ duyệt", "Duyệt", "Từ chối"
+        private String trangThai;
 
         private BigDecimal nguyenGia;
         private BigDecimal giaTriConLai;
@@ -74,12 +73,12 @@ public class PhieuThanhLyResponse {
 
         private String ghiChu;
 
-        // Người duyệt từng món (có thể null nếu từ chối)
+
         private String maNguoiDuyet;
         private String tenNguoiDuyet;
     }
 
-    // ================= HÀM CHUYỂN ĐỔI SIÊU CHUẨN =================
+
     public static PhieuThanhLyResponse from(PhieuThanhLy phieu) {
 
         // Tính tổng giá trị thu về
@@ -88,7 +87,7 @@ public class PhieuThanhLyResponse {
                 .filter(g -> g != null)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // Map danh sách chi tiết – ĐÃ THÊM TRẠNG THÁI & NGƯỜI DUYỆT
+        // Map danh sách chi tiết
         List<ChiTietResponse> chiTietList = phieu.getChiTiet().stream()
                 .map(ct -> {
                     ThietBi tb = ct.getThietBi();
@@ -105,7 +104,7 @@ public class PhieuThanhLyResponse {
                             .maPhong(phong != null ? phong.getMaPhong() : null)
                             .tenPhong(phong != null ? phong.getTenPhong() : null)
                             .tinhTrang(tb.getTinhTrang())
-                            .trangThai(ct.getTrangThai() != null ? ct.getTrangThai() : "Chờ duyệt") // THÊM TRẠNG THÁI
+                            .trangThai(ct.getTrangThai() != null ? ct.getTrangThai() : "Chờ duyệt")
                             .nguyenGia(tb.getGiaTriBanDau())
                             .giaTriConLai(tb.getGiaTriHienTai())
                             .soNamSuDung(ct.getSoNamSuDung())

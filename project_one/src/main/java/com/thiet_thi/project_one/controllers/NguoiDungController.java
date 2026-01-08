@@ -72,7 +72,6 @@ public class NguoiDungController {
             @RequestParam(defaultValue = "tenND") String sortBy,
             @RequestParam(defaultValue = "DESC") String sortDirection,
 
-            // Tham số lọc
             @RequestParam(required = false) String search,
             @RequestParam(required = false) String vaiTro,
             @RequestParam(required = false) String donVi,
