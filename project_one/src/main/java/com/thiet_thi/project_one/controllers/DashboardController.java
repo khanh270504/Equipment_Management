@@ -15,11 +15,6 @@ public class DashboardController {
 
     private final DashboardService dashboardService;
 
-    /**
-     * API CHÍNH CHO TOÀN BỘ DASHBOARD
-     * Frontend chỉ cần gọi 1 lần: GET /api/dashboard
-     * → Nhận toàn bộ dữ liệu thật: số liệu, biểu đồ, hoạt động gần đây
-     */
     @GetMapping
     public ResponseEntity<DashboardResponse> getDashboardData() {
         DashboardResponse data = dashboardService.getDashboardData();

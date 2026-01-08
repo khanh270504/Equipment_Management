@@ -30,7 +30,6 @@ public class AuthenticationController {
 
     AuthenticationService authenticationService;
 
-    // ==================== LOGIN ====================
     @PostMapping("/login")
     public ApiResponse<AuthenticationResponse> login(
             @RequestBody AuthenticationDTO dto,
@@ -38,17 +37,17 @@ public class AuthenticationController {
 
         var authResponse = authenticationService.authenticationResponse(dto);
 
-        // SET REFRESH TOKEN VÀO COOKIE
+
         Cookie refreshCookie = new Cookie("refresh_token", authResponse.getRefreshToken());
-        refreshCookie.setHttpOnly(true);           // JS không đọc được
-        refreshCookie.setSecure(false);            // TODO: true khi HTTPS
+        refreshCookie.setHttpOnly(true);
+        refreshCookie.setSecure(false);
         refreshCookie.setPath("/");
         refreshCookie.setMaxAge((int) authenticationService.getRefreshableDuration());
         refreshCookie.setAttribute("SameSite", "Strict");
 
         response.addCookie(refreshCookie);
 
-        // XÓA refreshToken khỏi response body
+
         return ApiResponse.<AuthenticationResponse>builder()
                 .result(AuthenticationResponse.builder()
                         .token(authResponse.getToken())
@@ -57,13 +56,13 @@ public class AuthenticationController {
                 .build();
     }
 
-    // ==================== REFRESH ====================
+
     @PostMapping("/refresh")
     public ApiResponse<AuthenticationResponse> refresh(
             HttpServletRequest request,
             HttpServletResponse response) throws ParseException, JOSEException {
 
-        // ĐỌC REFRESH TOKEN TỪ COOKIE
+
         String refreshToken = Arrays.stream(request.getCookies() != null ? request.getCookies() : new Cookie[0])
                 .filter(c -> "refresh_token".equals(c.getName()))
                 .findFirst()
@@ -72,7 +71,7 @@ public class AuthenticationController {
 
         var authResponse = authenticationService.refreshToken(refreshToken);
 
-        // CẤP REFRESH TOKEN MỚI + SET COOKIE
+
         Cookie newCookie = new Cookie("refresh_token", authResponse.getRefreshToken());
         newCookie.setHttpOnly(true);
         newCookie.setSecure(false); // TODO: true khi HTTPS
@@ -89,10 +88,10 @@ public class AuthenticationController {
                 .build();
     }
 
-    // ==================== LOGOUT ====================
+
     @PostMapping("/logout")
     public ApiResponse<Void> logout(HttpServletResponse response) {
-        // XÓA COOKIE
+
         Cookie cookie = new Cookie("refresh_token", null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
@@ -101,7 +100,7 @@ public class AuthenticationController {
         return ApiResponse.<Void>builder().build();
     }
 
-    // ==================== INTROSPECT ====================
+
     @PostMapping("/introspect")
     public ApiResponse<IntrospectResponse> introspect(
             @RequestBody IntrospectDTO dto) throws ParseException, JOSEException {
@@ -114,10 +113,9 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ApiResponse<AuthenticationResponse> register(@RequestBody RegisterDTO dto) {
 
-        // Gọi service
+
         var authResponse = authenticationService.register(dto);
 
-        // Trả về kết quả
         return ApiResponse.<AuthenticationResponse>builder()
                 .result(authResponse)
                 .message("Đăng ký thành công! Vui lòng chờ quản trị viên duyệt.")

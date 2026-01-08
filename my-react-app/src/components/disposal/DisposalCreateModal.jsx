@@ -159,7 +159,7 @@ export default function PhieuThanhLyCreateModal() {
       hinh_thuc: form.hinhThuc,
       ly_do_thanh_ly: form.lyDoThanhLy,
       ghi_chu: form.ghiChu,
-      ngay_lap: new Date().toLocaleDateString('vi-VN'),
+      ngay_lap: new Intl.DateTimeFormat('en-GB').format(new Date()),
       ma_nguoi_tao: currentUserId,
       trang_thai: "Chờ duyệt",
       chi_tiet: form.chiTiet.map(ct => ({

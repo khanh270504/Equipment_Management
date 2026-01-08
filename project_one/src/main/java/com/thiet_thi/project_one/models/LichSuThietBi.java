@@ -19,9 +19,9 @@ public class LichSuThietBi {
     @JoinColumn(name = "ma_tb", nullable = false)
     private ThietBi thietBi;
     @Column(name = "hanh_dong", length = 100)
-    private String hanhDong; // Ví dụ: "Kiểm kê", "Bảo trì", "Điều chuyển"
+    private String hanhDong;
 
-    @Column(name = "ghi_chu", length = 500) // Để dài chút để lưu chi tiết kết quả kiểm kê
+    @Column(name = "ghi_chu", length = 500)
     private String ghiChu;
     @Column(name = "trang_thai_cu", length = 50)
     private String trangThaiCu;
@@ -29,14 +29,14 @@ public class LichSuThietBi {
     @Column(name = "trang_thai_moi", length = 50)
     private String trangThaiMoi;
 
-    // Phòng
+
     @Column(name = "phong_cu", length = 100)
     private String phongCu;
 
     @Column(name = "phong_moi", length = 100)
     private String phongMoi;
 
-    // Loại thiết bị (nếu cần)
+
     @Column(name = "loai_cu", length = 100)
     private String loaiCu;
 

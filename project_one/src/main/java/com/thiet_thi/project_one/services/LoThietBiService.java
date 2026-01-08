@@ -29,7 +29,7 @@ public class LoThietBiService implements ILoThietBiService {
     private final LoaiThietBiRepository loaiThietBiRepository;
     private final PhongRepository phongRepository;
 
-    // ... (các import và khai báo repository giữ nguyên) ...
+
 
     @Override
     public LoThietBi create(LoThietBiDto dto) throws DataNotFoundException {
@@ -46,7 +46,7 @@ public class LoThietBiService implements ILoThietBiService {
             chiTiet = chiTietRepo.findById(dto.getMaCTDX())
                     .orElseThrow(() -> new DataNotFoundException("Không tìm thấy chi tiết đề xuất: " + dto.getMaCTDX()));
 
-            // Validate trạng thái & số lượng (Dùng code cũ của bạn)
+
             String trangThaiDX = chiTiet.getDeXuatMua().getTrangThai();
             if (!"DA_DUYET".equals(trangThaiDX) && !"Đã duyệt".equals(trangThaiDX)) {
                 throw new AppException(ErrorCode.PROCUREMENT_NOT_APPROVED);
@@ -57,7 +57,7 @@ public class LoThietBiService implements ILoThietBiService {
                 throw new AppException(ErrorCode.IMPORT_EXCEEDS_LIMIT);
             }
 
-            // Lấy thông tin từ đề xuất
+
             loaiThietBi = chiTiet.getLoaiThietBi();
             phongDuKien = chiTiet.getDeXuatMua().getPhong();
 
@@ -74,14 +74,13 @@ public class LoThietBiService implements ILoThietBiService {
 
         }
 
-        // 3. TẠO LÔ THIẾT BỊ (Đã sửa chiTiet có thể null)
         String autoMaLo = "LO-" + LocalDate.now().getYear() + "-" + UUID.randomUUID().toString().substring(0, 6).toUpperCase();
 
         LoThietBi lo = LoThietBi.builder()
                 .maLo(autoMaLo)
                 .tenLo(dto.getTenLo())
-                .chiTietDeXuatMua(chiTiet) // OKAY: Có thể null
-                .loaiThietBi(loaiThietBi)  // OKAY: Đã được gán giá trị ở trên
+                .chiTietDeXuatMua(chiTiet)
+                .loaiThietBi(loaiThietBi)
                 .nhaCungCap(ncc)
                 .soLuong(dto.getSoLuong())
                 .donGia(dto.getDonGia())
@@ -94,12 +93,10 @@ public class LoThietBiService implements ILoThietBiService {
 
         LoThietBi savedLo = loThietBiRepository.save(lo);
 
-        // 4. SINH THIẾT BỊ CON (Sử dụng các biến đã gán)
-        // ... (Phần sinh thiết bị con sử dụng loaiThietBi và phongDuKien) ...
-        // ... (Giữ nguyên logic bạn đã sửa ở các câu trước) ...
+
         List<ThietBi> listThietBiMoi = new ArrayList<>();
 
-        // Tạo trạng thái dựa trên việc có phòng hay không
+
         String trangThaiMacDinh = (phongDuKien != null) ? "Đang sử dụng" : "Sẵn sàng";
 
         for (int i = 1; i <= savedLo.getSoLuong(); i++) {
@@ -116,7 +113,7 @@ public class LoThietBiService implements ILoThietBiService {
                     .giaTriBanDau(savedLo.getDonGia())
                     .giaTriHienTai(savedLo.getDonGia())
                     .tinhTrang(trangThaiMacDinh)
-                    .phong(phongDuKien) // Gán phòng (có thể null)
+                    .phong(phongDuKien)
                     .build();
 
             listThietBiMoi.add(tb);

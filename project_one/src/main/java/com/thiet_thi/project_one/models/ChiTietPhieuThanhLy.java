@@ -18,21 +18,21 @@ public class ChiTietPhieuThanhLy {
     @Column(name = "ma_cttl")
     private String maCTTL;
 
-    // Liên kết với phiếu
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_phieu_thanh_ly", nullable = false)
     private PhieuThanhLy phieuThanhLy;
 
-    // Thiết bị bị thanh lý
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_tb", nullable = false)
     private ThietBi thietBi;
 
-    // TRẠNG THÁI CHI TIẾT: Duyệt / Từ chối / Chờ duyệt
-    @Column(name = "trang_thai", length = 20)
-    private String trangThai; // "Chờ duyệt", "Duyệt", "Từ chối"
 
-    // Thông tin kế toán trước thanh lý
+    @Column(name = "trang_thai", length = 20)
+    private String trangThai;
+
+
     @Column(name = "nguyen_gia", precision = 18, scale = 2)
     private BigDecimal nguyenGia;
 
@@ -45,7 +45,7 @@ public class ChiTietPhieuThanhLy {
     @Column(name = "trang_thai_cu_thiet_bi_cu", length = 50)
     private String tinhTrangTBCu;
 
-    // Thông tin thanh lý thực tế
+
     @Column(name = "hinh_thuc_thanh_ly", length = 100, nullable = false)
     private String hinhThucThanhLy;
 
@@ -61,7 +61,7 @@ public class ChiTietPhieuThanhLy {
     @Column(name = "ghi_chu", length = 1000)
     private String ghiChu;
 
-    // Người duyệt từng món (nếu cần)
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_ng_duyet")
     private NguoiDung nguoiDuyet;

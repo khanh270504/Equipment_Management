@@ -20,7 +20,6 @@ public class ChiTietThanhLyDto {
     @JsonProperty("ma_phieu_thanh_ly")
     private String maPhieuThanhLy;
 
-    // === THÔNG TIN THIẾT BỊ BỊ THANH LÝ ===
     @JsonProperty("ma_tb")
     private String maTB;
 
@@ -43,12 +42,11 @@ public class ChiTietThanhLyDto {
     private String tinhTrangTBCu;
 
     @JsonProperty("tinh_trang")
-    private String tinhTrang; // Ví dụ: Hỏng, Mục nát, Hết khấu hao...
+    private String tinhTrang;
 
     @JsonProperty("trang_thai")
-    private String trangThai; // "Duyệt", "Từ chối", "Chờ duyệt"
+    private String trangThai;
 
-    // === THÔNG TIN KẾ TOÁN TRƯỚC THANH LÝ ===
     @JsonProperty("nguyen_gia")
     private BigDecimal nguyenGia;
 
@@ -58,9 +56,9 @@ public class ChiTietThanhLyDto {
     @JsonProperty("so_nam_su_dung")
     private Integer soNamSuDung;
 
-    // === THÔNG TIN THANH LÝ THỰC TẾ ===
+
     @JsonProperty("hinh_thuc_thanh_ly")
-    private String hinhThucThanhLy; // Bán thanh lý, Tiêu hủy, Đấu giá, Tặng...
+    private String hinhThucThanhLy;
 
     @JsonProperty("ly_do_thanh_ly")
     private String lyDoThanhLy;
@@ -75,7 +73,6 @@ public class ChiTietThanhLyDto {
     @JsonProperty("ghi_chu")
     private String ghiChu;
 
-    // === NGƯỜI DUYỆT CHI TIẾT (NẾU CÓ) ===
     @JsonProperty("ma_nguoi_duyet")
     private String maNguoiDuyet;
 

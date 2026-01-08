@@ -9,18 +9,18 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class KiemKeDto {
 
-    // --- CÁC TRƯỜNG XÁC THỰC VÀ ĐỊNH DANH ---
 
-    @JsonProperty("ma_kiem_ke") // ID của Phiếu kiểm kê đang được cập nhật
+
+    @JsonProperty("ma_kiem_ke")
     private String maKiemKe;
 
-    @JsonProperty("ma_phong") // BẮT BUỘC: ID phòng đang kiểm kê
+    @JsonProperty("ma_phong")
     private String maPhong;
 
-    @JsonProperty("ma_nguoi_kiem_ke") // Người thực hiện
+    @JsonProperty("ma_nguoi_kiem_ke")
     private String maNguoiKiemKe;
 
-    @JsonProperty("ghi_chu") // Ghi chú chung
+    @JsonProperty("ghi_chu")
     private String ghiChu;
     @JsonProperty("ngay_kiem_ke")
     private LocalDate ngayKiemKe;

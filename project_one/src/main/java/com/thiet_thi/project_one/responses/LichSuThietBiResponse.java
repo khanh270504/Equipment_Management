@@ -14,20 +14,18 @@ public class LichSuThietBiResponse {
     private String maTB;
     private String tenTB;
 
-    // --- BỔ SUNG 2 TRƯỜNG NÀY (Để Frontend hiển thị) ---
+
     private String hanhDong;
     private String ghiChu;
-    // ---------------------------------------------------
 
-    // Trạng thái
     private String trangThaiCu;
     private String trangThaiMoi;
 
-    // Phòng
+
     private String phongCu;
     private String phongMoi;
 
-    // Loại thiết bị
+
     private String loaiCu;
     private String loaiMoi;
 
@@ -37,7 +35,7 @@ public class LichSuThietBiResponse {
     private String maND;
     private String tenNguoiThayDoi;
 
-    // Chuyển từ Entity → Response
+
     public static LichSuThietBiResponse fromLichSu(LichSuThietBi ls) {
         return LichSuThietBiResponse.builder()
                 .maLichSu(ls.getMaLichSu())

@@ -1,4 +1,3 @@
-// src/main/java/com/thiet_thi/project_one/iservices/ILichSuThietBiService.java
 package com.thiet_thi.project_one.iservices;
 
 import com.thiet_thi.project_one.responses.LichSuThietBiResponse;

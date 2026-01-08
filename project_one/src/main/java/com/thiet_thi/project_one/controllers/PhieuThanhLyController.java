@@ -36,7 +36,6 @@ public class PhieuThanhLyController {
         return ResponseEntity.ok(PhieuThanhLyResponse.from(phieu));
     }
 
-    // 2. Lấy danh sách tất cả phiếu thanh lý (có chi tiết đầy đủ)
     @GetMapping
     public ResponseEntity<List<PhieuThanhLyResponse>> getAll() {
         List<PhieuThanhLyResponse> responses = phieuThanhLyService.getAll().stream()
@@ -45,7 +44,7 @@ public class PhieuThanhLyController {
         return ResponseEntity.ok(responses);
     }
 
-    // 3. Lấy 1 phiếu chi tiết theo mã
+
     @GetMapping("/{ma}")
     public ResponseEntity<PhieuThanhLyResponse> getByMa(
             @PathVariable String ma) throws DataNotFoundException {
@@ -78,7 +77,6 @@ public class PhieuThanhLyController {
         }
     }
 
-    // 2. Sửa phiếu (chỉ khi chưa duyệt)
     @PutMapping("/{ma}")
     public ResponseEntity<?> update(
             @PathVariable String ma,
@@ -92,7 +90,6 @@ public class PhieuThanhLyController {
         }
     }
 
-    // 3. Xóa phiếu (chỉ khi chưa duyệt)
     @DeleteMapping("/{maPhieu}")
     public ResponseEntity<String> delete(@PathVariable String maPhieu) {
         try {
@@ -106,12 +103,12 @@ public class PhieuThanhLyController {
     @GetMapping("/export")
     public ResponseEntity<byte[]> exportExcel() {
         try {
-            // 1. Lấy dữ liệu
+
             List<PhieuThanhLy> listData = phieuThanhLyRepository.findAll();
 
             byte[] excelBytes = excelService.exportThanhLyToExcel(listData);
 
-            // 3. Trả về file
+
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=danh_sach_phieu_thanh_ly.xlsx")
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
@@ -128,10 +125,10 @@ public class PhieuThanhLyController {
     @GetMapping("/{ma}/export-bien-ban")
     public ResponseEntity<byte[]> exportBienBan(@PathVariable String ma) {
         try {
-            // 1. Lấy chi tiết phiếu
-            PhieuThanhLy phieu = phieuThanhLyService.getByID(ma); // Hàm này bạn chắc đã có
 
-            // 2. Vẽ Excel chi tiết (Biên bản)
+            PhieuThanhLy phieu = phieuThanhLyService.getByID(ma);
+
+
             byte[] excelBytes = excelService.exportBienBanThanhLy(phieu);
 
             return ResponseEntity.ok()

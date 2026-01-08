@@ -39,18 +39,18 @@ public class NguoiDungService implements INguoiDungService {
     @Override
     @PreAuthorize("hasRole('ADMIN')")
     public NguoiDungResponse createNguoiDung(NguoiDungDto dto) {
-        // Kiểm tra trùng tên đăng nhập
+
         if (nguoiDungRepository.existsByEmail(dto.getEmail())) {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
 
-        // Encode mật khẩu
+
         String encodedPassword = passwordEncoder.encode(dto.getMatKhau());
 
         DonVi dv = donViRepository.findById(dto.getMaDonVi())
                 .orElseThrow(() -> new RuntimeException("khong tim thay Don Vi"));
 
-        // Tạo người dùng
+
         NguoiDung nd = NguoiDung.builder()
                 .email(dto.getEmail())
                 .matKhau(encodedPassword)

@@ -18,7 +18,7 @@ public class NhaCungCapService implements INhaCungCapService {
     public List<NhaCungCapResponse> getAll() {
         return nhaCungCapRepository.findAll()
                 .stream()
-                .map(NhaCungCapResponse::from) // Convert Entity -> Response
+                .map(NhaCungCapResponse::from) 
                 .toList();
     }
 }
