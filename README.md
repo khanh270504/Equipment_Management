@@ -149,4 +149,26 @@ npm run dev
 
 ### Cổng (Port): Đảm bảo cổng 8080 (Backend) và 5173 (Frontend) không bị chiếm dụng bởi ứng dụng khác trước khi chạy.
 
+## 8. Một số hình ảnh demo 
+### Đăng nhập
+<img width="957" height="437" alt="image" src="https://github.com/user-attachments/assets/6ac57d34-dc19-4383-8727-715360e70cac" />
+
+### Tổng Quan
+<img width="958" height="440" alt="image" src="https://github.com/user-attachments/assets/0068ff5b-8ed1-4d21-96fa-a85f36a80fbf" />
+
+### Danh sách thiết bị
+<img width="956" height="442" alt="image" src="https://github.com/user-attachments/assets/04c377ec-4c14-4e2e-8148-f6661d360b7f" />
+
+### Thanh Lý
+<img width="956" height="445" alt="image" src="https://github.com/user-attachments/assets/aa59c4da-c60c-480c-99da-3aa3daebedee" />
+
+### Mua sắm
+<img width="959" height="440" alt="image" src="https://github.com/user-attachments/assets/5ac69606-d679-4f03-ad7c-8d0d6384e761" />
+
+
+
+
+
+
+
 
