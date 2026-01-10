@@ -1,4 +1,4 @@
-package com.thiet_thi.project_one.dtos;
+package com.thiet_thi.project_one.responses;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

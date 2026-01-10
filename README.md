@@ -34,21 +34,21 @@ Dự án được xây dựng với kiến trúc **Monolithic**, tách biệt Ba
 ## 3. Chức năng chính
 
 1. **Quản lý thiết bị:**
-   - Thêm mới, cập nhật, xóa, xem chi tiết thiết bị.
-   - Quản lý trạng thái (Mới, Đang sử dụng, Hỏng, Đang sửa chữa, Đã thanh lý, ...).
+    - Thêm mới, cập nhật, xóa, xem chi tiết thiết bị.
+    - Quản lý trạng thái (Mới, Đang sử dụng, Hỏng, Đang sửa chữa, Đã thanh lý, ...).
 2. **Quản lý quy trình mua sắm:**
-   - Người dùng tạo **Yêu cầu đề xuất mua**.
-   - Quản lý phê duyệt đề xuất.
-   - Nhập kho tự động từ đề xuất đã duyệt.
+    - Người dùng tạo **Yêu cầu đề xuất mua**.
+    - Quản lý phê duyệt đề xuất.
+    - Nhập kho tự động từ đề xuất đã duyệt.
 3. **Quản lý tài chính & Kho:**
-   - **Tính khấu hao:** Tự động tính giá trị còn lại dựa trên thời gian sử dụng.
-   - **Kiểm kê:** Đối chiếu số lượng thực tế và hệ thống.
-   - **Thanh lý:** Xử lý các thiết bị hết hạn hoặc hỏng hóc không thể sửa chữa.
+    - **Tính khấu hao:** Tự động tính giá trị còn lại dựa trên thời gian sử dụng.
+    - **Kiểm kê:** Đối chiếu số lượng thực tế và hệ thống.
+    - **Thanh lý:** Xử lý các thiết bị hết hạn hoặc hỏng hóc không thể sửa chữa.
 4. **Tiện ích:**
-   - **Xuất/Nhập Excel:** Hỗ trợ import dữ liệu thiết bị hàng loạt và xuất báo cáo kiểm kê.
+    - **Xuất/Nhập Excel:** Hỗ trợ import dữ liệu thiết bị hàng loạt và xuất báo cáo kiểm kê.
 5. **Bảo mật:**
-   - Đăng nhập/Đăng ký.
-   - Phân quyền dựa trên vai trò (Admin, Staff, User).
+    - Đăng nhập/Đăng ký.
+    - Phân quyền dựa trên vai trò (Admin, Staff, User).
 
 ---
 
@@ -84,7 +84,7 @@ Equipment_Management/
 ## 6. Hướng dẫn cài đặt & cấu hình (Installation & Configuration)
 
 ### Yêu cầu tiên quyết (Prerequisites)
-- **Cách 1 (Khuyên dùng):** Cài đặt Docker Desktop (bao gồm Docker Compose).  
+- **Cách 1 (Khuyên dùng):** Cài đặt Docker Desktop (bao gồm Docker Compose).
 - **Cách 2 (Thủ công):** Cài Java JDK 21, Maven, Node.js và MySQL.
 
 ### Bước 1: Cấu hình biến môi trường (.env)
@@ -149,7 +149,7 @@ npm run dev
 
 ### Cổng (Port): Đảm bảo cổng 8080 (Backend) và 5173 (Frontend) không bị chiếm dụng bởi ứng dụng khác trước khi chạy.
 
-## 8. Một số hình ảnh demo 
+## 8. Một số hình ảnh demo
 ### Đăng nhập
 <img width="957" height="437" alt="image" src="https://github.com/user-attachments/assets/6ac57d34-dc19-4383-8727-715360e70cac" />
 
@@ -164,7 +164,6 @@ npm run dev
 
 ### Mua sắm
 <img width="959" height="440" alt="image" src="https://github.com/user-attachments/assets/5ac69606-d679-4f03-ad7c-8d0d6384e761" />
-
 
 
 

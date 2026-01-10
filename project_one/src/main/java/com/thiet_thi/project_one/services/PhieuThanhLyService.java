@@ -10,6 +10,7 @@ import com.thiet_thi.project_one.repositorys.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -247,6 +248,7 @@ public class PhieuThanhLyService implements IThanhLyService {
 
     @Override
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     public PhieuThanhLy duyetPhieu(String maPhieu, String maNguoiDuyet) throws DataNotFoundException {
         PhieuThanhLy phieu = getByID(maPhieu);
 
@@ -290,6 +292,7 @@ public class PhieuThanhLyService implements IThanhLyService {
 
     @Override
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     public PhieuThanhLy tuChoiPhieu(String maPhieu, String maNguoiDuyet, String lyDoTuChoi) throws DataNotFoundException {
         PhieuThanhLy phieu = getByID(maPhieu);
 

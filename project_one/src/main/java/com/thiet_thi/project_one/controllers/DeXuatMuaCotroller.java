@@ -1,6 +1,6 @@
 package com.thiet_thi.project_one.controllers;
 
-import com.thiet_thi.project_one.dtos.ApiResponse;
+import com.thiet_thi.project_one.responses.ApiResponse;
 import com.thiet_thi.project_one.dtos.DeXuatMuaDto;
 import com.thiet_thi.project_one.exceptions.DataNotFoundException;
 import com.thiet_thi.project_one.iservices.IDeXuatMuaService;

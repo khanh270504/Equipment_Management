@@ -7,6 +7,7 @@ import com.thiet_thi.project_one.iservices.IVaiTroService;
 import com.thiet_thi.project_one.models.VaiTro;
 import com.thiet_thi.project_one.repositorys.VaiTroRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -21,6 +22,7 @@ public class VaiTroService implements IVaiTroService {
     private final VaiTroRepository vaiTroRepository;
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<VaiTroDto> getAllRoles() {
         return vaiTroRepository.findAll().stream()
                 .map(this::toDTO)
@@ -35,6 +37,7 @@ public class VaiTroService implements IVaiTroService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public VaiTroDto createRole(VaiTroDto dto) {
         if(vaiTroRepository.existsById(dto.getMaVaiTro())) {
             throw new  AppException(ErrorCode.ROLE_EXISTED);
@@ -50,6 +53,7 @@ public class VaiTroService implements IVaiTroService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public VaiTroDto updateRole(String maVaiTro, VaiTroDto dto) {
         VaiTro role = vaiTroRepository.findByMaVaiTro(maVaiTro)
                 .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_EXISTED));
@@ -60,6 +64,7 @@ public class VaiTroService implements IVaiTroService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteRole(String maVaiTro) {
         vaiTroRepository.deleteById(maVaiTro);
     }

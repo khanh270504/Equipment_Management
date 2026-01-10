@@ -288,6 +288,7 @@ public class ThietBiService implements IThietBiService {
     }
 
     @Override
+    @Transactional
     public void deleteThietBi(String maThietBi) throws DataNotFoundException {
         ThietBi tb = thietBiRepository.findById(maThietBi)
                 .orElseThrow(() -> new DataNotFoundException("Không tìm thấy thiết bị để xóa"));

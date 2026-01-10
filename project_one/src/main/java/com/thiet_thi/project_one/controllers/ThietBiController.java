@@ -1,6 +1,6 @@
 package com.thiet_thi.project_one.controllers;
 
-import com.thiet_thi.project_one.dtos.ApiResponse;
+import com.thiet_thi.project_one.responses.ApiResponse;
 import com.thiet_thi.project_one.dtos.ThietBiDto;
 import com.thiet_thi.project_one.exceptions.DataNotFoundException;
 import com.thiet_thi.project_one.iservices.IThietBiService;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/thiet_bi")

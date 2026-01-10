@@ -1,7 +1,7 @@
 package com.thiet_thi.project_one.controllers;
 
 
-import com.thiet_thi.project_one.dtos.ApiResponse;
+import com.thiet_thi.project_one.responses.ApiResponse;
 import com.thiet_thi.project_one.dtos.NguoiDungDto;
 import com.thiet_thi.project_one.iservices.INguoiDungService;
 import com.thiet_thi.project_one.responses.NguoiDungResponse;
