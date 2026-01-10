@@ -21,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,6 +39,7 @@ public class NguoiDungService implements INguoiDungService {
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
+    @Transactional
     public NguoiDungResponse createNguoiDung(NguoiDungDto dto) {
 
         if (nguoiDungRepository.existsByEmail(dto.getEmail())) {
@@ -73,6 +75,7 @@ public class NguoiDungService implements INguoiDungService {
 
 
     @Override
+    @Transactional
     public NguoiDungResponse updateNguoiDung(String maNguoiDung, NguoiDungDto dto) {
         NguoiDung nd = nguoiDungRepository.findById(maNguoiDung)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
@@ -104,6 +107,7 @@ public class NguoiDungService implements INguoiDungService {
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
+    @Transactional
     public void deleteNguoiDung(String maNguoiDung) {
         NguoiDung nd = nguoiDungRepository.findById(maNguoiDung)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));

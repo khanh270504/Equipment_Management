@@ -4,7 +4,7 @@ import com.thiet_thi.project_one.dtos.LoTBStatDto;
 import com.thiet_thi.project_one.dtos.LoThietBiDto;
 import com.thiet_thi.project_one.iservices.ILoThietBiService;
 import com.thiet_thi.project_one.models.LoThietBi;
-import com.thiet_thi.project_one.dtos.ApiResponse; // 👇 Dùng class này để gói dữ liệu
+import com.thiet_thi.project_one.responses.ApiResponse; // 👇 Dùng class này để gói dữ liệu
 import com.thiet_thi.project_one.repositorys.LoThietBiRepository;
 import com.thiet_thi.project_one.responses.LoThietBiResponse;
 import com.thiet_thi.project_one.services.ExcelService;

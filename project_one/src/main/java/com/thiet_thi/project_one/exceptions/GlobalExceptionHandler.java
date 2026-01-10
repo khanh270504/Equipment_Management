@@ -1,6 +1,6 @@
 package com.thiet_thi.project_one.exceptions;
 
-import com.thiet_thi.project_one.dtos.ApiResponse;
+import com.thiet_thi.project_one.responses.ApiResponse;
 import jakarta.validation.ConstraintViolation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

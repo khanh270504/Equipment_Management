@@ -1,7 +1,7 @@
 package com.thiet_thi.project_one.controllers;
 
 import com.nimbusds.jose.JOSEException;
-import com.thiet_thi.project_one.dtos.ApiResponse;
+import com.thiet_thi.project_one.responses.ApiResponse;
 import com.thiet_thi.project_one.dtos.AuthenticationDTO;
 import com.thiet_thi.project_one.dtos.IntrospectDTO;
 import com.thiet_thi.project_one.dtos.RegisterDTO;
